@@ -1,0 +1,41 @@
+meta:
+  task: 'train'
+  benchmark: 'mujoco'
+  algo: 'ppo'
+
+resources:
+  cuda: false
+
+logging:
+  wandb_project: 'jolteon'
+  record: false
+
+# Training
+num_timesteps: 1e7
+eval_steps_per_iter: 10
+eval_frequency: 10
+
+# Model
+perception_stack: 'mlp_64'
+layer_norm: true
+shared_value: false
+
+# Optimization
+p_lr: 3.0e-4
+lr_schedule: 'linear'
+clip_norm: 0.5
+
+# Algorithm
+rollout_len: 2048
+optim_epochs_per_iter: 10
+batch_size: 32
+gamma: 0.99
+gae_lambda: 0.97
+eps: 0.2
+baseline_scale: 0.5
+p_ent_reg_scale: 0.
+
+rnd_explo: false
+rnd_batch_norm: true
+rnd_lr: 5.0e-4
+proportion_of_exp_per_rnd_update: 1.

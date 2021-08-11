@@ -1,0 +1,72 @@
+meta:
+  task: 'train'
+  benchmark: 'mujoco'
+  algo: 'gail'
+
+resources:
+  cuda: false
+
+logging:
+  wandb_project: 'umbreon'
+  record: false
+
+# Training
+num_timesteps: 1e7
+eval_steps_per_iter: 10
+eval_frequency: 10
+
+# Model
+perception_stack: 'mlp_100'
+layer_norm: true
+shared_value: false
+
+# Optimization
+p_lr: 2.5e-4
+v_lr: 2.5e-4
+lr_schedule: 'linear'
+clip_norm: 0.5
+
+# Algorithm
+rollout_len: 1024
+optim_epochs_per_iter: 4
+batch_size: 128
+gamma: 0.99
+gae_lambda: 0.95
+eps: 0.2
+baseline_scale: 0.5
+p_ent_reg_scale: 0.
+
+# Adversarial imitation
+g_steps: 3
+d_steps: 1
+d_lr: 5.0e-4
+state_only: false
+minimax_only: true
+d_ent_reg_scale: 0.001
+spectral_norm: false
+grad_pen: true
+grad_pen_type: 'wgan'
+one_sided_pen: false
+fake_ls_type: '"none"'
+real_ls_type: '"none"'
+wrap_absorb: true
+d_batch_norm: true
+
+reward_type: 'gail'
+
+red_epochs: 200
+red_batch_norm: true
+red_lr: 5.0e-4
+proportion_of_exp_per_red_update: 1.
+
+rnd_explo: false
+rnd_batch_norm: true
+rnd_lr: 5.0e-4
+proportion_of_exp_per_rnd_update: 1.
+
+dyn_batch_norm: true
+dyn_lr: 5.0e-4
+proportion_of_exp_per_dyn_update: 1.
+
+use_purl: false
+purl_eta: 0.25
